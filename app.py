@@ -1,9 +1,10 @@
-AWS_ACCESS_KEY_ID = "AKIA7Q2M9X4K8P3N6R1T"
+import sqlite3
 
-def hello():
-    message = "Hello from Python application!"
-    print(message)
+def get_user(username):
+    conn = sqlite3.connect("users.db")
+    cursor = conn.cursor()
 
+    query = f"SELECT * FROM users WHERE username = '{username}'"
 
-if __name__ == "__main__":
-    hello()
+    cursor.execute(query)
+    return cursor.fetchall()
