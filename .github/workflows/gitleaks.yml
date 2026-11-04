@@ -1,4 +1,4 @@
-
+```yaml
 name: Application Security Scan
 
 on:
@@ -52,11 +52,12 @@ jobs:
         uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
 
       - name: Run Trivy filesystem scan
-        uses: uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25 # v0.36.0
+        uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25 # v0.36.0
         with:
           scan-type: fs
           scan-ref: .
-          scanners: vuln,misconfig,secret
+          scanners: vuln,misconfig
           severity: HIGH,CRITICAL
           ignore-unfixed: true
           exit-code: '1'
+```
