@@ -1,5 +1,5 @@
 
-name: Gitleaks Secret Scan
+name: Application Security Scan
 
 on:
   push:
@@ -13,8 +13,10 @@ permissions:
   contents: read
 
 jobs:
+
+  # Secret Detection
   gitleaks:
-    name: Scan for secrets
+    name: Gitleaks - Secret Detection
     runs-on: ubuntu-latest
 
     steps:
@@ -27,3 +29,18 @@ jobs:
         uses: gitleaks/gitleaks-action@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  # Static Application Security Testing
+  semgrep:
+    name: Semgrep - SAST
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Semgrep
+        run: pip install semgrep
+
+      - name: Run Semgrep
+        run: semgrep scan --config auto --error .
