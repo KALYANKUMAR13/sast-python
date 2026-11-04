@@ -1,4 +1,4 @@
-AWS_ACCESS_KEY_ID = "AKIAIOSFODNN7EXAMPLE"
+AWS_ACCESS_KEY_ID = "AKIAQWERTYUIOPASDFGH12"
 
 def hello():
     message = "Hello from Python application!"
