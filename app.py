@@ -1,10 +1,21 @@
+
 import sqlite3
 
 def get_user(username):
-    conn = sqlite3.connect("users.db")
-    cursor = conn.cursor()
+    connection = sqlite3.connect("users.db")
+    cursor = connection.cursor()
 
-    query = f"SELECT * FROM users WHERE username = '{username}'"
+    # SECURE: Parameterized SQL query
+    query = "SELECT * FROM users WHERE username = ?"
 
-    cursor.execute(query)
-    return cursor.fetchall()
+    cursor.execute(query, (username,))
+
+    result = cursor.fetchall()
+
+    connection.close()
+
+    return result
+
+
+if __name__ == "__main__":
+    get_user("admin")
